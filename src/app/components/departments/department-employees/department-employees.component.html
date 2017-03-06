@@ -1,4 +1,5 @@
-<h2>Department Employees</h2>
+<h2>Employees of {{department.name}} Department</h2>
+<p *ngIf="status">{{status}}</p>
 <div class="employee-list" *ngIf="users.length">
   <md-card *ngFor="let user of users">
     <h4 class="employee-name">{{user.firstName}} {{user.lastName}}</h4>

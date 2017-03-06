@@ -3,6 +3,7 @@ import { Department } from '../department.model';
 import { MdDialog } from '@angular/material';
 import { DepartmentsDeleteConfirmComponent } from '../departments-delete-confirm/departments-delete-confirm.component';
 import { Router } from '@angular/router';
+import { DepartmentsService } from 'app/components/departments/departments.service';
 
 @Component({
   selector: 'app-departments-list',
@@ -15,7 +16,8 @@ export class DepartmentsListComponent implements OnInit {
   @Output() deleteDepartment: EventEmitter<number>;
 
   constructor(private dialog: MdDialog,
-              private router: Router) {
+              private router: Router,
+              private departmentService: DepartmentsService) {
     this.deleteDepartment = new EventEmitter();
   }
 
@@ -33,8 +35,9 @@ export class DepartmentsListComponent implements OnInit {
 
   }
 
-  navigateToEmployees(id): void {
-    this.router.navigate([ 'departments', id, 'employees' ]);
+  showEmployees(department): void {
+    this.departmentService.selectedDepartment = department;
+    this.router.navigate([ 'departments', department.id, 'employees' ]);
   }
 
 }

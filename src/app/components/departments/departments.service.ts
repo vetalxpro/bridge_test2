@@ -8,7 +8,8 @@ import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class DepartmentsService {
-  private headers = new Headers({ 'Content-Type': 'application/json' })
+  private headers = new Headers({ 'Content-Type': 'application/json' });
+  public selectedDepartment: Department;
 
   constructor(private http: Http) {
   }
