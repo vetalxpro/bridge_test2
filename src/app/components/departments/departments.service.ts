@@ -14,15 +14,24 @@ export class DepartmentsService {
   constructor(private http: Http) {
   }
 
+
   getAllDepartments(): Observable<Department[]> {
     return this.http.get('http://ebsexpress-env.us-west-2.elasticbeanstalk.com/users/departments')
       .map(departments => departments.json());
   }
 
+  getDepartment(id: number) {
+    return this.http.get(`http://ebsexpress-env.us-west-2.elasticbeanstalk.com/users/departments/${id}`);
+  }
+
   getDepartmentUsers(id: number): Observable<User[]> {
-    return this.http.get('http://ebsexpress-env.us-west-2.elasticbeanstalk.com/users/employees', { headers: this.headers })
-      .map(users => users.json())
-      .map(users => users.filter(user => user.departmentId === id));
+    return this.getDepartment(id)
+      .switchMap(department => {
+        this.selectedDepartment = department.json();
+        return this.http.get('http://ebsexpress-env.us-west-2.elasticbeanstalk.com/users/employees')
+          .map(users => users.json())
+          .map(users => users.filter(user => user.departmentId === id));
+      });
 
   }
 
@@ -39,6 +48,11 @@ export class DepartmentsService {
 
   addEmployee(employee): Observable<any> {
     return this.http.post(`http://ebsexpress-env.us-west-2.elasticbeanstalk.com/users/employees`, employee, { headers: this.headers })
+      .map(res => res.json());
+  }
+
+  removeEmployee(id): Observable<any> {
+    return this.http.delete(`http://ebsexpress-env.us-west-2.elasticbeanstalk.com/users/employees/${id}`)
       .map(res => res.json());
   }
 }

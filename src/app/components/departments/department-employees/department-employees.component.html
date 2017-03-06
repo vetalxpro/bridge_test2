@@ -1,11 +1,25 @@
-<h2>Employees of {{department.name}} Department</h2>
-<p *ngIf="status">{{status}}</p>
-<div class="employee-list" *ngIf="users.length">
-  <md-card *ngFor="let user of users">
-    <h4 class="employee-name">{{user.firstName}} {{user.lastName}}</h4>
-    <p md-line>phone: {{user.phone}}</p>
-    <p md-line>salary: {{user.salary}}</p>
-  </md-card>
+<md-spinner *ngIf="isLoading" class="spinner"></md-spinner>
+<div *ngIf="department">
+  <h2>Employees of {{department.name}} Department</h2>
+  <p *ngIf="!users.length">No employees</p>
+  <div class="employee-list" *ngIf="users.length">
+    <md-card *ngFor="let user of users">
+      <button md-icon-button [mdMenuTriggerFor]="menu" class="menu-trigger">
+        <md-icon>more_vert</md-icon>
+      </button>
+      <h4 class="employee-name">{{user.firstName}} {{user.lastName}}</h4>
+      <p md-line>phone: {{user.phone}}</p>
+      <p md-line>salary: {{user.salary}}</p>
+      <md-menu #menu="mdMenu">
+        <button md-menu-item (click)="onRemoveUser(user.id)">
+          <md-icon>remove</md-icon>
+          <span>Delete</span>
+        </button>
+      </md-menu>
+    </md-card>
+  </div>
+  <button md-raised-button color="primary" (click)="back()">Back</button>
+  <button md-raised-button color="primary" (click)="showForm()">Add</button>
+
 </div>
-<button md-raised-button color="primary" (click)="back()">Back</button>
-<button md-raised-button color="primary" (click)="showForm()">Add</button>
+

@@ -25,15 +25,22 @@ export class DepartmentsComponent implements OnInit {
   openForm() {
     let dialogRef = this.dialog.open(DepartmentsFormComponent);
     dialogRef.afterClosed()
-      .switchMap(newDepartment => this.departmentService.addDepartment(newDepartment))
-      .subscribe(department => this.departments.push(department));
+      .subscribe(newDepartment => {
+        if (newDepartment) {
+          this.departmentService.addDepartment(newDepartment)
+            .subscribe(department => this.departments.push(department));
+        }
+      });
   }
 
 
   onDeleteDepartment(id: number) {
     this.departmentService.deleteDepartment(id)
       .subscribe(res => {
-        this.departments = this.departments.filter(department => department.id !== id);
+        let index = this.departments.findIndex(dep => dep.id === id);
+        if (index > -1) {
+          this.departments.splice(index, 1);
+        }
       });
   }
 }
