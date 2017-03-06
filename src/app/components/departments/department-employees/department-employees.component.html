@@ -1,0 +1,10 @@
+<h2>Department Employees</h2>
+<div class="employee-list" *ngIf="users.length">
+  <md-card *ngFor="let user of users">
+    <h4 class="employee-name">{{user.firstName}} {{user.lastName}}</h4>
+    <p md-line>phone: {{user.phone}}</p>
+    <p md-line>salary: {{user.salary}}</p>
+  </md-card>
+</div>
+<button md-raised-button color="primary" (click)="back()">Back</button>
+<button md-raised-button color="primary" (click)="showForm()">Add</button>

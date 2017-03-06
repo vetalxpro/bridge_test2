@@ -1,0 +1,37 @@
+<h2>Adding new Employee</h2>
+<form #emplyeeForm="ngForm" (ngSubmit)="onSubmit()">
+  <md-input-container class="full-width">
+    <input mdInput
+           placeholder="Firstname"
+           name="firstName"
+           [(ngModel)]="firstName"
+           required>
+  </md-input-container>
+  <md-input-container class="full-width">
+    <input mdInput
+           placeholder="Lastname"
+           name="lastName"
+           [(ngModel)]="lastName"
+           required>
+  </md-input-container>
+  <md-input-container class="full-width">
+    <input mdInput
+           placeholder="phone"
+           name="Phone"
+           [(ngModel)]="phone"
+           required>
+  </md-input-container>
+  <md-input-container class="full-width">
+    <input mdInput
+           placeholder="Salary"
+           name="salary"
+           [(ngModel)]="salary"
+           required>
+  </md-input-container>
+  <button md-raised-button color="primary"
+          type="submit"
+          [disabled]="!emplyeeForm.form.valid"
+  >
+    Add Employee
+  </button>
+</form>

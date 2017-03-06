@@ -1,0 +1,9 @@
+<button md-mini-fab class="add-button" (click)="openForm()">
+  <md-icon>add</md-icon>
+</button>
+<app-departments-list
+  [departments]="departments"
+  (deleteDepartment)="onDeleteDepartment($event)"
+>
+
+</app-departments-list>

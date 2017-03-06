@@ -1,0 +1,18 @@
+<div class="department-list">
+  <md-card *ngFor="let department of departments" class="department-card">
+    <h2>{{department.name}}</h2>
+    <p>{{department.description}}</p>
+    <md-card-actions>
+      <button md-raised-button color="primary"
+              (click)="navigateToEmployees(department.id)"
+      >View Employees
+      </button>
+      <button md-raised-button
+              color="warn"
+              (click)="onDelete(department.id)"
+      >Delete
+      </button>
+    </md-card-actions>
+
+  </md-card>
+</div>

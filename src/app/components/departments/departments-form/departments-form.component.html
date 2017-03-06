@@ -1,0 +1,26 @@
+<h2 md-dialog-title>Adding New Department</h2>
+<div md-dialog-content>
+  <form class="departments-form" #departmentForm="ngForm" (ngSubmit)="onSubmit()">
+    <md-input-container class="full-width">
+      <input mdInput
+             placeholder="Department Name"
+             name="name"
+             [(ngModel)]="name"
+             required>
+    </md-input-container>
+    <md-input-container class="full-width">
+      <input mdInput
+             placeholder="Description"
+             name="description"
+             [(ngModel)]="description"
+             required>
+    </md-input-container>
+    <button md-raised-button color="primary"
+            type="submit"
+            [disabled]="!departmentForm.form.valid"
+    >
+      Add Deparment
+    </button>
+  </form>
+</div>
+
